@@ -1,0 +1,105 @@
+﻿@model EGYmotor.Models.RegisterUser
+@{
+    Layout = "~/Views/_Layoutlogin.cshtml";
+}
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login & Sign Up - EGYmotor</title>
+    <link rel="stylesheet" href="~/css/login.css" />
+    <script>
+        function toggleForm(showSignup) {
+            document.getElementById('login-form').style.display = showSignup ? 'none' : 'block';
+            document.getElementById('signup-form').style.display = showSignup ? 'block' : 'none';
+        }
+    </script>
+</head>
+<body>
+    <div class="auth-container">
+
+        <div id="login-form">
+            <h2>Login</h2>
+
+            @using (Html.BeginForm("Login", "Login", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+                <div class="form-group">
+                    <input asp-for="Email" placeholder="Email" type="email" required />
+                    @Html.ValidationMessageFor(m => m.Email)
+                </div>
+                <div class="form-group">
+                    <input asp-for="Password" placeholder="Password" type="password" required />
+                    @Html.ValidationMessageFor(m => m.Password)
+                </div>
+                <button type="submit">Login</button>
+            }
+            <span class="toggle-link" onclick="toggleForm(true)">Don't have an account? Sign Up</span>
+        </div>
+
+        <div id="signup-form" style="display: none;">
+            <h2>Sign Up</h2>
+
+            @using (Html.BeginForm("Register", "Login", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="form-group">
+                    <input asp-for="UserName" placeholder="Full Name" required />
+                    @Html.ValidationMessageFor(m => m.UserName)
+                </div>
+
+                <div class="form-group">
+                    <input asp-for="Email" placeholder="Email" type="email" required />
+                    @Html.ValidationMessageFor(m => m.Email)
+                </div>
+
+                <div class="form-group">
+                    <input asp-for="PhoneNumber" placeholder="Phone Number" required />
+                    @Html.ValidationMessageFor(m => m.PhoneNumber)
+                </div>
+
+                <div class="form-group">
+                    <input asp-for="Password" placeholder="Password" type="password" required />
+                    @Html.ValidationMessageFor(m => m.Password)
+                </div>
+
+                <div class="form-group">
+                    <input asp-for="ConfirmPassword" placeholder="Confirm Password" type="password" required />
+                    @Html.ValidationMessageFor(m => m.ConfirmPassword)
+                </div>
+
+                <button type="submit">Sign Up</button>
+            }
+            <span class="toggle-link" onclick="toggleForm(false)">Already have an account? Login</span>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("form").submit(function () {
+                var form = $(this);
+                if (form.valid())
+                {
+
+                } else 
+                {
+                }
+            });
+        });
+    </script>
+    <script>
+        $(document).ready(function () {
+            var hasErrors = $(".validation-summary-errors").length > 0 || $(".field-validation-error").length > 0;
+
+            if (hasErrors) {
+                toggleForm(true); 
+            }
+        });
+    </script>
+
+
+</body>
+</html>

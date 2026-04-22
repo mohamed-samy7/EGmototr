@@ -1,0 +1,39 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EGYmotor</title>
+    <link rel="stylesheet" href="~/css/site.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <img src="~/imges/logo.webp" alt="EGYmotor">
+            </div>
+            <div class="slogan">
+                <p><span> EGY </span><br />motor</p>
+            </div>
+            <ul class="nav-links">
+                <li><a asp-controller="Home" asp-action="Index">Home</a></li>
+                <li><a asp-controller="services" asp-action="services">Services</a></li>
+                <li><a asp-controller="Feedback" asp-action="Create">Feedback</a></li>
+                <li><a asp-controller="Payment" asp-action="Create">Payment</a></li>
+                <li><a asp-controller="Login" asp-action="Logout">Logout</a></li>
+            </ul>
+        </nav>
+
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

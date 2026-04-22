@@ -1,0 +1,55 @@
+﻿@{
+    Layout = "~/Views/_LayoutAdmin.cshtml";
+}
+@model EGYmotor.Models.Admin
+<link rel="stylesheet" href="~/css/RegisterAdmin.css" />
+<h2>Admin Registration</h2>
+
+<form asp-action="Register" method="post">
+    <div>
+        <label asp-for="Name"></label>
+        <input asp-for="Name" />
+        <span asp-validation-for="Name"></span>
+    </div>
+
+    <div>
+        <label asp-for="Email"></label>
+        <input asp-for="Email" />
+        <span asp-validation-for="Email"></span>
+    </div>
+
+    <div>
+        <label asp-for="PhoneNumber"></label>
+        <input asp-for="PhoneNumber" />
+        <span asp-validation-for="PhoneNumber"></span>
+    </div>
+
+    <div>
+        <label asp-for="Password"></label>
+        <input asp-for="Password" type="password" />
+        <span asp-validation-for="Password"></span>
+    </div>
+
+    <div>
+        <label asp-for="ConfirmPassword"></label>
+        <input asp-for="ConfirmPassword" type="password" />
+        <span asp-validation-for="ConfirmPassword"></span>
+    </div>
+
+    <div>
+        <label>Registration Code</label>
+        <input name="secretCode" />
+        @if (ViewData.ModelState["SecretCode"] != null)
+        {
+            <span style="color:red">@ViewData.ModelState["SecretCode"].Errors.FirstOrDefault()?.ErrorMessage</span>
+        }
+    </div>
+
+    <button type="submit">Register</button>
+</form>
+
+<p>Already have an account? <a href="@Url.Action("Login", "Admin")">Login here</a></p>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

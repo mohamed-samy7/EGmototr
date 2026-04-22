@@ -1,0 +1,35 @@
+﻿@model EGYmotor.Models.Request
+@using Microsoft.AspNetCore.Http
+@inject IHttpContextAccessor HttpContextAccessor
+
+@{
+    Layout = "~/Views/_Layoutlogin.cshtml";
+    ViewData["Title"] = "My Request";
+}
+
+<link rel="stylesheet" href="~/css/Request.css" />
+
+<h2 style="text-align: center;">My Request</h2>
+
+@if (Model != null)
+{
+    <div class="Request-container">
+        <div class="Request-card">
+            <div class="Request-user">@Model.RegisterUser?.UserName</div>
+            <div class="Request-email">@Model.RegisterUser?.Email</div>
+            <div class="Request-Problem">@Model.Problem</div>
+
+            @if (Model.UserId == HttpContextAccessor.HttpContext.Session.GetInt32("UserId"))
+            {
+                <form asp-action="DeleteMyRequest" asp-controller="RequestTechnician" method="post" style="margin-top:10px;">
+                    <input type="hidden" name="id" value="@Model.RequestId" />
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                </form>
+            }
+        </div>
+    </div>
+}
+else
+{
+    <p style="text-align:center; font-size: 1.2rem;">No Request yet.</p>
+}

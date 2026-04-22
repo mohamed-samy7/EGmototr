@@ -1,0 +1,43 @@
+﻿@model EGYmotor.Models.Payment
+
+@{
+    ViewData["Title"] = "Make a Payment";
+    Layout = "~/Views/_Layout2.cshtml";
+}
+<link rel="stylesheet" href="~/css/PaymentCreate.css" />
+<h2>Make a Payment</h2>
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success">@TempData["SuccessMessage"]</div>
+}
+
+<form asp-action="Create" method="post">
+    <div class="form-group">
+        <label>Amount</label>
+        <input asp-for="Amount" class="form-control" />
+        <span asp-validation-for="Amount" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label>Payment Method</label>
+        <select asp-for="PaymentMethod" class="form-control">
+            <option value="">-- Select --</option>
+            <option>Visa</option>
+            <option>Cash</option>
+            <option>Wallet</option>
+        </select>
+        <span asp-validation-for="PaymentMethod" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary mt-3">Submit Payment</button>
+</form>
+<a href="@Url.Action("MyPayments", "Payment")" class="view-feedback-btn">
+    <button type="button">My Payment</button>
+</a>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

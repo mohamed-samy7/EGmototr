@@ -1,0 +1,40 @@
+﻿body {
+    background: #301e8f;
+}
+
+.feedback-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+    padding: 1rem;
+}
+
+.feedback-card {
+    background-color: #f9f9f9;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    padding: 1.5rem;
+    transition: transform 0.3s ease;
+}
+
+    .feedback-card:hover {
+        transform: translateY(-5px);
+    }
+
+.feedback-user {
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 0.3rem;
+}
+
+.feedback-email {
+    font-size: 0.9rem;
+    color: #666;
+    margin-bottom: 0.8rem;
+}
+
+.feedback-message {
+    font-size: 1rem;
+    color: #444;
+}

@@ -1,0 +1,32 @@
+﻿@{
+    Layout = "~/Views/_LayoutAdmin.cshtml";
+}
+@model List<EGYmotor.Models.RegisterUser>
+
+@{
+    ViewData["Title"] = "All Registered Users";
+}
+<link rel="stylesheet" href="~/css/ViewAllUsers.css" />
+<h2>All Registered Users</h2>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Full Name</th>
+            <th>Email</th>
+            <th>Phone Number</th>
+            <th>Register Date</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var user in Model)
+        {
+            <tr>
+                <td>@user.UserName</td>
+                <td>@user.Email</td>
+                <td>@user.PhoneNumber</td>
+                <td>@user.RegisterDate.ToString("yyyy-MM-dd")</td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,40 @@
+﻿@model List<EGYmotor.Models.Payment>
+
+@{
+    ViewData["Title"] = "All Payments";
+    Layout = "~/Views/_LayoutAdmin.cshtml";
+}
+<link rel="stylesheet" href="~/css/MyPayments.css" />
+
+<h2>All Users' Payments</h2>
+
+@if (!Model.Any())
+{
+    <p>No payments have been made yet.</p>
+}
+else
+{
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>User Name</th>
+                <th>Email</th>
+                <th>Amount</th>
+                <th>Method</th>
+                <th>Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var payment in Model)
+            {
+                <tr>
+                    <td>@payment.RegisterUser?.UserName</td>
+                    <td>@payment.RegisterUser?.Email</td>
+                    <td>@payment.Amount</td>
+                    <td>@payment.PaymentMethod</td>
+                    <td>@payment.PaymentDate.ToShortDateString()</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

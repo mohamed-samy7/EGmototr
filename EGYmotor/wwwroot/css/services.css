@@ -1,0 +1,34 @@
+﻿
+.services {
+    text-align: center;
+    padding: 50px 20px;
+    background-color: #493D9E;
+}
+
+    .services h2 {
+        font-size: 2em;
+        color: #B2A5FF;
+    }
+
+.service-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.service-item {
+    background: #DAD2FF;
+    color: #0a0a0a;
+    padding: 15px 20px;
+    border-radius: 8px;
+    font-size: 1.2em;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: 0.3s;
+}
+
+    .service-item:hover {
+        background: #FFF2AF;
+        transform: scale(1.05);
+    }

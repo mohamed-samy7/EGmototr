@@ -1,0 +1,43 @@
+﻿@{
+    Layout = "~/Views/_LayoutAdmin.cshtml";
+}
+@model EGYmotor.Models.Admin
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dark Security | Dashboard</title>
+    <link rel="stylesheet" href="~/css/AdminDashBoard.css">
+
+</head>
+<body>
+    <div class="dashboard">
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <h2>Egy motor</h2>
+            </div>
+            <ul class="sidebar-menu">
+                <li><a asp-controller="Admin" asp-action="ViewAllUsers"><i class="fas fa-laptop-code"></i> <span>Users</span></a></li>
+                <li><a asp-controller="Admin" asp-action="ViewAllRequest"><i class="fas fa-laptop-code"></i> <span>Requests</span></a></li>
+                <li><a asp-controller="Admin" asp-action="ManageFeedbacks"><i class="fas fa-laptop-code"></i> <span>Feedbacks</span></a></li>
+                <li><a asp-controller="Admin" asp-action="AllPayments"><i class="fas fa-laptop-code"></i> <span>Payments</span></a></li>
+                <li><a asp-controller="Admin" asp-action="Logout"><i class="fas fa-laptop-code"></i> <span>Logout</span></a></li>
+
+            </ul>
+        </div>
+
+        <div class="main-content">
+            <div class="top-nav" style="float:right;>
+                <div class="user-actions">
+                    <div class="user-profile">
+                        <div class="user-avatar">AD</div>
+                        <span>@Model.Name</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</body>
+</html>

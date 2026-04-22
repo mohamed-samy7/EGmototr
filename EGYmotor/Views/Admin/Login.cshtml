@@ -1,0 +1,26 @@
+﻿@{
+    Layout = "~/Views/_LayoutAdmin.cshtml";
+}
+<link rel="stylesheet" href="~/css/RegisterAdmin.css" />
+<h2>Admin Login</h2>
+
+<form asp-action="Login" method="post">
+    <div>
+        <label>Email</label>
+        <input name="email" type="email" />
+    </div>
+
+    <div>
+        <label>Password</label>
+        <input name="password" type="password" />
+    </div>
+
+    @if (ViewBag.Error != null)
+    {
+        <p style="color:red">@ViewBag.Error</p>
+    }
+
+    <button type="submit">Login</button>
+</form>
+
+<p>Don't have an account? <a href="@Url.Action("Register", "Admin")">Register here</a></p>

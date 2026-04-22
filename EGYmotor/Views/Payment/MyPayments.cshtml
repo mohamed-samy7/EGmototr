@@ -1,0 +1,36 @@
+﻿@model IEnumerable<EGYmotor.Models.Payment>
+
+@{
+    ViewData["Title"] = "My Payments";
+    Layout = "~/Views/_Layoutlogin.cshtml";
+}
+<link rel="stylesheet" href="~/css/MyPayments.css" />
+
+<h2>My Payment History</h2>
+
+@if (!Model.Any())
+{
+    <p>You haven't made any payments yet.</p>
+}
+else
+{
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Amount</th>
+                <th>Method</th>
+                <th>Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var payment in Model)
+            {
+                <tr>
+                    <td>@payment.Amount</td>
+                    <td>@payment.PaymentMethod</td>
+                    <td>@payment.PaymentDate.ToShortDateString()</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

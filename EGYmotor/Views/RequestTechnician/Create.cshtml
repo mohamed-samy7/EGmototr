@@ -1,0 +1,74 @@
+﻿@model EGYmotor.Models.Request
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Request Technician - EGYmotor</title>
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" />
+    <link rel="stylesheet" href="~/css/RequestTechnician.css" />
+</head>
+<body>
+
+    <div class="container">
+        <h2>Request a Technician to Your Location</h2>
+
+        @if (TempData["SuccessMessage"] != null)
+        {
+            <div class="alert alert-success">@TempData["SuccessMessage"]</div>
+        }
+
+        @using (Html.BeginForm("Create", "RequestTechnician", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+
+            <label for="problem">Describe the Problem</label>
+            @Html.TextAreaFor(m => m.Problem, new { @class = "form-control", rows = 4, required = "required", placeholder = "Describe the issue here" })
+            @Html.ValidationMessageFor(m => m.Problem)
+
+            <label>Location</label>
+            <div id="map" style="height: 300px; margin-bottom: 15px;">Loading map...</div>
+
+            @Html.HiddenFor(m => m.Location, new { id = "Location" })
+
+            <button type="submit" class="btn btn-primary">Submit Request</button>
+        }
+
+        <br />
+
+        <form asp-action="MyRequest" asp-controller="RequestTechnician" method="get">
+            <button type="submit" class="btn btn-secondary">View My Current Request</button>
+        </form>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script>
+        var defaultLat = 30.033333;
+        var defaultLng = 31.233334;
+
+        var map = L.map('map').setView([defaultLat, defaultLng], 13);
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; OpenStreetMap contributors'
+        }).addTo(map);
+
+        var marker = L.marker([defaultLat, defaultLng], { draggable: true }).addTo(map)
+            .bindPopup("Move the marker to your location.").openPopup();
+
+        document.getElementById("Location").value = defaultLat + "," + defaultLng;
+
+        marker.on('dragend', function (e) {
+            var position = marker.getLatLng();
+            document.getElementById("Location").value = position.lat + "," + position.lng;
+        });
+
+        map.on('click', function (e) {
+            marker.setLatLng(e.latlng);
+            marker.openPopup();
+            document.getElementById("Location").value = e.latlng.lat + "," + e.latlng.lng;
+        });
+    </script>
+</body>
+</html>

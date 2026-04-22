@@ -1,0 +1,40 @@
+﻿@model IEnumerable<EGYmotor.Models.Feedback>
+@using Microsoft.AspNetCore.Http
+@inject IHttpContextAccessor HttpContextAccessor
+
+
+@{
+    Layout = "~/Views/_Layoutlogin.cshtml";
+    ViewData["Title"] = "All Feedbacks";
+}
+
+<link rel="stylesheet" href="~/css/feedback2.css" />
+
+<h2 style="text-align: center;">Feedback From Users</h2>
+
+<div class="feedback-container">
+    @if (Model.Any())
+    {
+        foreach (var feedback in Model)
+        {
+            <div class="feedback-card">
+                <div class="feedback-user">@feedback.RegisterUser?.UserName</div>
+                <div class="feedback-email">@feedback.RegisterUser?.Email</div>
+                <div class="feedback-message">@feedback.Message</div>
+
+                @if (feedback.UserId == HttpContextAccessor.HttpContext.Session.GetInt32("UserId"))
+                {
+                    <form asp-action="DeleteMyFeedback" asp-controller="Feedback" method="post" style="margin-top:10px;">
+                        <input type="hidden" name="id" value="@feedback.FeedbackID" />
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
+                }
+            </div>
+        }
+    }
+    else
+    {
+        <p style="text-align:center; font-size: 1.2rem;">No feedbacks yet.</p>
+    }
+</div>
+
