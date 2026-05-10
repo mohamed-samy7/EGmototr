@@ -1,5 +1,6 @@
-﻿@{
-    Layout = "~/Views/_LayoutAdmin.cshtml";
+﻿
+@{
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml"; // ✅
 }
 @model EGYmotor.Models.Admin
 <!DOCTYPE html>
@@ -22,8 +23,8 @@
                 <li><a asp-controller="Admin" asp-action="ViewAllRequest"><i class="fas fa-laptop-code"></i> <span>Requests</span></a></li>
                 <li><a asp-controller="Admin" asp-action="ManageFeedbacks"><i class="fas fa-laptop-code"></i> <span>Feedbacks</span></a></li>
                 <li><a asp-controller="Admin" asp-action="AllPayments"><i class="fas fa-laptop-code"></i> <span>Payments</span></a></li>
+                <li><a asp-controller="Admin" asp-action="Profits"><i class="fas fa-laptop-code"></i> <span>Profits</span></a></li>
                 <li><a asp-controller="Admin" asp-action="Logout"><i class="fas fa-laptop-code"></i> <span>Logout</span></a></li>
-
             </ul>
         </div>
 

@@ -1,13 +1,12 @@
-﻿
-.services {
+﻿.services {
     text-align: center;
     padding: 50px 20px;
-    background-color: #493D9E;
+    background-color: #1e2a3a;
 }
 
     .services h2 {
         font-size: 2em;
-        color: #B2A5FF;
+        color: #c8d4e0;
     }
 
 .service-list {
@@ -19,16 +18,18 @@
 }
 
 .service-item {
-    background: #DAD2FF;
-    color: #0a0a0a;
+    background: #253447;
+    color: #c8d4e0;
     padding: 15px 20px;
     border-radius: 8px;
     font-size: 1.2em;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
     transition: 0.3s;
+    border: 1px solid #2e4060;
 }
 
     .service-item:hover {
-        background: #FFF2AF;
+        background: #2e4060;
         transform: scale(1.05);
+        color: #ffffff;
     }

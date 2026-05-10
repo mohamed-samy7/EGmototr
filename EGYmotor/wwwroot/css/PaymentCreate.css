@@ -6,29 +6,41 @@
 h2 {
     text-align: center;
     margin-bottom: 20px;
-    color: white;
+    color: #c8d4e0;
 }
 
 form {
     max-width: 600px;
     margin: auto;
-    background-color: #5742c7;
+    background-color: #253447;
     padding: 30px;
     border-radius: 40px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    border: 1px solid #2e4060;
 }
 
 .form-group label {
     font-weight: 600;
+    color: #c8d4e0;
 }
 
 .form-control {
     border-radius: 6px;
+    background-color: #1e2a3a;
+    border: 1px solid #2e4060;
+    color: #c8d4e0;
 }
+
+    .form-control:focus {
+        background-color: #1e2a3a;
+        border-color: #7a95b0;
+        color: #c8d4e0;
+        box-shadow: 0 0 0 0.2rem rgba(122, 149, 176, 0.25);
+    }
 
 button {
     width: 100%;
-    background-color: #007bff;
+    background-color: #4a6080;
     border: none;
     color: white;
     padding: 10px;
@@ -38,7 +50,7 @@ button {
 }
 
     button:hover {
-        background-color: #0056b3;
+        background-color: #7a95b0;
     }
 
 .alert {
@@ -48,7 +60,7 @@ button {
 }
 
 .view-feedback-btn button {
-    background-color: #007bff;
+    background-color: #4a6080;
     color: white;
     border: none;
     padding: 12px 24px;
@@ -57,9 +69,9 @@ button {
     cursor: pointer;
     transition: background-color 0.3s ease;
     margin-top: 20px;
-    width:200px;
+    width: 200px;
 }
 
     .view-feedback-btn button:hover {
-        background-color: #0056b3;
+        background-color: #7a95b0;
     }

@@ -1,0 +1,218 @@
+﻿@model List<EGYmotor.Models.MonthlyProfit>
+@{
+    ViewData["Title"] = "Profits";
+    Layout = null;
+}
+
+<style>
+    @@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@400;500&display=swap');
+
+    .profits-wrapper {
+        font-family: 'Syne', sans-serif;
+        padding: 2.5rem;
+        background: #0d0f14;
+        min-height: 100vh;
+        color: #e8e6e0;
+    }
+
+    .profits-header {
+        display: flex;
+        align-items: baseline;
+        gap: 1rem;
+        margin-bottom: 2.5rem;
+        border-bottom: 1px solid #1e2130;
+        padding-bottom: 1.5rem;
+    }
+
+    .profits-header h2 {
+        font-size: 2rem;
+        font-weight: 800;
+        letter-spacing: -0.03em;
+        color: #f0ede6;
+        margin: 0;
+    }
+
+    .profits-header span {
+        font-family: 'DM Mono', monospace;
+        font-size: 0.75rem;
+        color: #4a9d6f;
+        background: #0e2218;
+        border: 1px solid #1a4030;
+        padding: 0.2rem 0.6rem;
+        border-radius: 4px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+    }
+
+    .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.25rem;
+        margin-bottom: 2.5rem;
+    }
+
+    .stat-card {
+        background: #12151e;
+        border: 1px solid #1e2130;
+        border-radius: 12px;
+        padding: 1.5rem 1.75rem;
+        position: relative;
+        overflow: hidden;
+        transition: border-color 0.2s;
+    }
+
+    .stat-card:hover { border-color: #2e334a; }
+
+    .stat-card::before {
+        content: '';
+        position: absolute;
+        top: 0; left: 0; right: 0;
+        height: 2px;
+    }
+
+    .stat-card.green::before { background: linear-gradient(90deg, #2ecc71, #27ae60); }
+    .stat-card.blue::before  { background: linear-gradient(90deg, #3b82f6, #2563eb); }
+    .stat-card.amber::before { background: linear-gradient(90deg, #f59e0b, #d97706); }
+
+    .stat-label {
+        font-size: 0.7rem;
+        font-family: 'DM Mono', monospace;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: #5a607a;
+        margin-bottom: 0.75rem;
+    }
+
+    .stat-value {
+        font-size: 1.9rem;
+        font-weight: 800;
+        letter-spacing: -0.04em;
+        line-height: 1;
+        color: #f0ede6;
+    }
+
+    .stat-value .currency {
+        font-size: 0.85rem;
+        font-weight: 400;
+        color: #5a607a;
+        margin-left: 0.3rem;
+        font-family: 'DM Mono', monospace;
+    }
+
+    .table-wrapper {
+        background: #12151e;
+        border: 1px solid #1e2130;
+        border-radius: 12px;
+        overflow: hidden;
+    }
+
+    .table-wrapper table {
+        width: 100%;
+        border-collapse: collapse;
+        font-family: 'DM Mono', monospace;
+        font-size: 0.85rem;
+    }
+
+    .table-wrapper thead tr {
+        background: #0d0f14;
+        border-bottom: 1px solid #1e2130;
+    }
+
+    .table-wrapper thead th {
+        padding: 1rem 1.5rem;
+        text-align: left;
+        font-size: 0.65rem;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        color: #3d4258;
+        font-weight: 500;
+    }
+
+    .table-wrapper tbody tr {
+        border-bottom: 1px solid #161924;
+        transition: background 0.15s;
+    }
+
+    .table-wrapper tbody tr:last-child { border-bottom: none; }
+    .table-wrapper tbody tr:hover { background: #161924; }
+
+    .table-wrapper tbody td {
+        padding: 1rem 1.5rem;
+        color: #c8c4bc;
+    }
+
+    .td-month {
+        color: #f0ede6 !important;
+        font-weight: 500;
+        font-family: 'Syne', sans-serif !important;
+    }
+
+    .td-amount { color: #4a9d6f !important; font-weight: 500; }
+
+    .td-badge {
+        display: inline-block;
+        background: #0e1a2e;
+        border: 1px solid #1a3050;
+        color: #4a80c4;
+        padding: 0.15rem 0.55rem;
+        border-radius: 4px;
+        font-size: 0.78rem;
+    }
+
+    @@media (max-width: 768px) {
+        .stats-grid { grid-template-columns: 1fr; }
+        .profits-wrapper { padding: 1.25rem; }
+    }
+</style>
+
+<div class="profits-wrapper">
+
+    <div class="profits-header">
+        <h2>Profits Overview</h2>
+        <span>Live Data</span>
+    </div>
+
+    <div class="stats-grid">
+        <div class="stat-card green">
+            <div class="stat-label">Total Revenue</div>
+            <div class="stat-value">
+                @ViewBag.TotalRevenue
+                <span class="currency">EGP</span>
+            </div>
+        </div>
+        <div class="stat-card blue">
+            <div class="stat-label">Total Transactions</div>
+            <div class="stat-value">@ViewBag.TotalTransactions</div>
+        </div>
+        <div class="stat-card amber">
+            <div class="stat-label">Avg per Transaction</div>
+            <div class="stat-value">
+                @ViewBag.AvgPerTransaction
+                <span class="currency">EGP</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="table-wrapper">
+        <table>
+            <thead>
+                <tr>
+                    <th>Month</th>
+                    <th>Transactions</th>
+                    <th>Total Amount</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td class="td-month">@item.MonthName</td>
+                        <td><span class="td-badge">@item.Transactions</span></td>
+                        <td class="td-amount">@item.TotalAmount EGP</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+</div>

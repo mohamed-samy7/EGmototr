@@ -1,6 +1,6 @@
 ﻿body {
     font-family: Arial, sans-serif;
-    background: #301e8f;
+    background: #1e2a3a;
     margin: 0;
     padding: 0;
 }
@@ -8,16 +8,17 @@
 .container {
     width: 90%;
     max-width: 600px;
-    background: #6e62b2;
+    background: #253447;
     margin: 40px auto;
     padding: 30px;
     border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    border: 1px solid #2e4060;
 }
 
 h2 {
     text-align: center;
-    color:black;
+    color: #c8d4e0;
     margin-bottom: 25px;
 }
 
@@ -25,30 +26,33 @@ label {
     display: block;
     margin-bottom: 5px;
     font-weight: bold;
-    color: black;
+    color: #c8d4e0;
 }
 
 input, textarea, select {
     width: 100%;
     padding: 10px;
     margin-bottom: 15px;
-    border: 1px solid #ccc;
+    border: 1px solid #2e4060;
     border-radius: 6px;
+    background-color: #1e2a3a;
+    color: #c8d4e0;
 }
 
 button {
     width: 100%;
     padding: 12px;
-    background-color: #007bff;
+    background-color: #4a6080;
     border: none;
     color: white;
     font-size: 16px;
     border-radius: 6px;
     cursor: pointer;
+    transition: 0.3s;
 }
 
     button:hover {
-        background-color: #0056b3;
+        background-color: #7a95b0;
     }
 
 #map {

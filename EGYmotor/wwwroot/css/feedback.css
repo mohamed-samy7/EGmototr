@@ -1,7 +1,7 @@
 ﻿body {
     font-family: 'Segoe UI', sans-serif;
     margin: 0;
-    background-color:  #301e8f;
+    background-color: #1e2a3a;
 }
 
 .contact-section {
@@ -17,7 +17,7 @@
 
     .contact-header h2 {
         font-size: 32px;
-        color: #007bff;
+        color: #c8d4e0;
     }
 
 .contact-grid {
@@ -28,62 +28,68 @@
 }
 
 .contact-info {
-    background: #6e62b2;
+    background: #253447;
     padding: 25px;
     border-radius: 10px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    border: 1px solid #2e4060;
 }
 
     .contact-info h3 {
         margin-bottom: 10px;
-        color: #020303;
+        color: #c8d4e0;
     }
 
     .contact-info p {
         margin: 10px 0;
-        color: #2b2525;
+        color: #7a95b0;
     }
 
 form {
-    background: #6e62b2;
+    background: #253447;
     padding: 25px;
     border-radius: 10px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    border: 1px solid #2e4060;
 }
 
     form input, form textarea {
         width: 100%;
         padding: 10px;
         margin: 10px 0 20px;
-        border: 1px solid #ccc;
+        border: 1px solid #2e4060;
         border-radius: 5px;
         resize: none;
+        background-color: #1e2a3a;
+        color: #c8d4e0;
     }
 
     form button {
         padding: 10px 20px;
-        background: #007bff;
+        background: #4a6080;
         color: white;
         border: none;
         border-radius: 5px;
         cursor: pointer;
+        transition: background-color 0.3s ease;
     }
 
         form button:hover {
-            background: #0056b3;
+            background: #7a95b0;
         }
-    .view-feedback-btn button {
-        background-color: #007bff;
-        color: white;
-        border: none;
-        padding: 12px 24px;
-        font-size: 16px;
-        border-radius: 8px;
-        cursor: pointer;
-        transition: background-color 0.3s ease;
-        margin-top: 20px;
-    }
+
+.view-feedback-btn button {
+    background-color: #4a6080;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    font-size: 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 20px;
+}
 
     .view-feedback-btn button:hover {
-           background-color: #0056b3;
+        background-color: #7a95b0;
     }

@@ -114,8 +114,41 @@ namespace EGYmotor.Controllers
             return View(payments);
         }
 
+        public async Task<IActionResult> Profits()
+        {
+            int? userId = HttpContext.Session.GetInt32("ID");
+            if (userId == null)
+                return RedirectToAction("Login");
 
+            var payments = await _context.Payments.ToListAsync();
+
+            var totalRevenue = payments.Sum(p => p.Amount);
+            var totalTransactions = payments.Count;
+            var avgPerTransaction = totalTransactions > 0
+                                        ? totalRevenue / totalTransactions
+                                        : 0;
+
+            var monthlyProfits = payments
+                .GroupBy(p => new { p.PaymentDate.Year, p.PaymentDate.Month })
+                .Select(g => new MonthlyProfit
+                {
+                    Year = g.Key.Year,
+                    Month = g.Key.Month,
+                    TotalAmount = g.Sum(p => p.Amount),
+                    Transactions = g.Count()
+                })
+                .OrderByDescending(x => x.Year)
+                .ThenByDescending(x => x.Month)
+                .ToList();
+
+            ViewBag.TotalRevenue = totalRevenue;
+            ViewBag.TotalTransactions = totalTransactions;
+            ViewBag.AvgPerTransaction = avgPerTransaction;
+
+            return View(monthlyProfits);
+        }
 
     }
+
 
 }
