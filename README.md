@@ -1,2 +1,0 @@
-"# EGYmotor" 
-"# EGmototr" 
