@@ -15,6 +15,8 @@ namespace EGYmotor.Models
         [Required(ErrorMessage = "enter your locatoin")]
         public string Location { get; set; }
 
+        public string? ImagePath { get; set; }
+
         [ForeignKey("RegisterUser")]
         public int UserId { get; set; }
 

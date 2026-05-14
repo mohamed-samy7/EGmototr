@@ -13,12 +13,14 @@ namespace EGYmotor.Models
 
         [Required]
         [Range(1, 10000, ErrorMessage = "Amount must be between 1 and 10,000.")]
+        [Column(TypeName = "decimal(18,2)")]
         public decimal Amount { get; set; }
 
         [Required]
-        public string PaymentMethod { get; set; }  // e.g. "Visa", "Cash", "Wallet"
+        public string PaymentMethod { get; set; }
 
         public DateTime PaymentDate { get; set; } = DateTime.Now;
+
         [ForeignKey(nameof(UserId))]
         public RegisterUser RegisterUser { get; set; }
     }

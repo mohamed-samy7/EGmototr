@@ -24,12 +24,12 @@ namespace EGYmotor.Models
         public string PhoneNumber { get; set; }
 
         [Required(ErrorMessage = "Password is required.")]
-        [DataType(DataType.Password)] 
+        [DataType(DataType.Password)]
         [StringLength(100, MinimumLength = 8, ErrorMessage = "Password must be at least 8 characters long.")]
         [RegularExpression(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$", ErrorMessage = "Password must contain at least one uppercase letter, one lowercase letter, and one number.")]
         public string Password { get; set; }
 
-        
+        [NotMapped]
         [Required(ErrorMessage = "Confirm password is required.")]
         [DataType(DataType.Password)]
         [Compare("Password", ErrorMessage = "Password and confirmation password do not match.")]
@@ -42,7 +42,5 @@ namespace EGYmotor.Models
         public Request? Request { get; set; }
         public Feedback? Feedback { get; set; }
         public ICollection<Payment> Payments { get; set; }
-
     }
 }
-

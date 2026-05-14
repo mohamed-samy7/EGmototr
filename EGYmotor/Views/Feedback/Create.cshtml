@@ -1,5 +1,4 @@
 ﻿@model EGYmotor.Models.Feedback
-
 <html lang="en">
 <head>
     <meta charset="UTF-8" />
@@ -8,32 +7,28 @@
     <link rel="stylesheet" href="~/css/feedback.css" />
 </head>
 <body>
-
     <div class="contact-section">
         <div class="contact-header">
             <h2>Contact Us</h2>
-            <p>We’d love to hear from you! Reach out to us anytime.</p>
+            @if (ViewBag.Error != null)
+            {
+                <div style="color:red; text-align:center; margin-top:10px;">@ViewBag.Error</div>
+            }
+            <p>We'd love to hear from you! Reach out to us anytime.</p>
         </div>
-
         <div class="contact-grid">
-
             <div class="contact-info">
                 <h3>📍 Our Location</h3>
                 <p>EGYmotor Garage, 15 El-Tahrir St., Nasr City, Cairo, Egypt</p>
-
                 <h3>📞 Call Us</h3>
-                <p>+20 115 605 4974</p>
-
+                <p>01020705772</p>
                 <h3>📧 Email</h3>
                 <p>Egymotor@gmail.com</p>
             </div>
-
             <form asp-action="Create" method="post">
                 @Html.AntiForgeryToken()
                 <h3>📝 Send Us a Message</h3>
-
                 <div class="form-group">
-
                         <textarea asp-for="Message"
                                   rows="5"
                                   placeholder="Your Message"
@@ -41,7 +36,6 @@
                         </textarea>
                     <span asp-validation-for="Message" class="text-danger"></span>
                 </div>
-
                 <button type="submit" class="btn btn-primary">
                     Submit Feedback
                 </button>
@@ -49,15 +43,12 @@
             <a href="@Url.Action("AllFeedbacks", "Feedback")" class="view-feedback-btn">
                 <button type="button">View Feedback</button>
             </a>
-
         </div>
     </div>
-
     @section Scripts {
         @{
             await Html.RenderPartialAsync("_ValidationScriptsPartial");
         }
     }
-
 </body>
 </html>

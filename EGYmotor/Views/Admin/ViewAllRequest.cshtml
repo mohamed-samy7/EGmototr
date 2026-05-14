@@ -1,22 +1,21 @@
 ﻿@{
-    Layout = "~/Views/Shared/_LayoutAdmin.cshtml"; // ✅
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 @model List<EGYmotor.Models.Request>
-
 @{
-    ViewData["Title"] = "All Registered Users";
+    ViewData["Title"] = "All Requests";
 }
 <link rel="stylesheet" href="~/css/ViewAllUsers.css" />
-<h2>All Registered Users</h2>
-
+<h2>All Requests</h2>
 <table class="table table-bordered">
     <thead>
         <tr>
             <th>Full Name</th>
             <th>Email</th>
             <th>Phone Number</th>
-            <th>Problem</th>  <!-- جديد: عمود المشكلة -->
-            <th>Location</th> <!-- جديد: عمود الموقع -->
+            <th>Problem</th>
+            <th>Location</th>
+            <th>Image</th>
         </tr>
     </thead>
     <tbody>
@@ -26,8 +25,18 @@
                 <td>@user.RegisterUser?.UserName</td>
                 <td>@user.RegisterUser?.Email</td>
                 <td>@user.RegisterUser?.PhoneNumber</td>
-                <td>@user.Problem</td>  <!-- عرض المشكلة، إذا كانت موجودة -->
+                <td>@user.Problem</td>
                 <td>@user.Location</td>
+                <td>
+                    @if (!string.IsNullOrEmpty(user.ImagePath))
+                    {
+                        <img src="@user.ImagePath" style="width:100px; border-radius:6px;" />
+                    }
+                    else
+                    {
+                        <span>No Image</span>
+                    }
+                </td>
             </tr>
         }
     </tbody>

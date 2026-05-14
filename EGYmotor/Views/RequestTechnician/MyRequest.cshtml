@@ -1,35 +1,38 @@
-﻿@model EGYmotor.Models.Request
+﻿@model List<EGYmotor.Models.Request>
 @using Microsoft.AspNetCore.Http
 @inject IHttpContextAccessor HttpContextAccessor
-
 @{
     Layout = "~/Views/_Layoutlogin.cshtml";
     ViewData["Title"] = "My Request";
 }
-
 <link rel="stylesheet" href="~/css/Request.css" />
-
 <h2 style="text-align: center;">My Request</h2>
 
-@if (Model != null)
+@if (ViewBag.Message != null)
 {
-    <div class="Request-container">
-        <div class="Request-card">
-            <div class="Request-user">@Model.RegisterUser?.UserName</div>
-            <div class="Request-email">@Model.RegisterUser?.Email</div>
-            <div class="Request-Problem">@Model.Problem</div>
-
-            @if (Model.UserId == HttpContextAccessor.HttpContext.Session.GetInt32("UserId"))
-            {
-                <form asp-action="DeleteMyRequest" asp-controller="RequestTechnician" method="post" style="margin-top:10px;">
-                    <input type="hidden" name="id" value="@Model.RequestId" />
-                    <button type="submit" class="btn btn-danger">Delete</button>
-                </form>
-            }
-        </div>
-    </div>
+    <p style="text-align:center; font-size: 1.2rem;">@ViewBag.Message</p>
 }
 else
 {
-    <p style="text-align:center; font-size: 1.2rem;">No Request yet.</p>
+    <div class="Request-container">
+        @foreach (var request in Model)
+        {
+            <div class="Request-card">
+                <div class="Request-user">@request.RegisterUser?.UserName</div>
+                <div class="Request-email">@request.RegisterUser?.Email</div>
+                <div class="Request-Problem">@request.Problem</div>
+                @if (!string.IsNullOrEmpty(request.ImagePath))
+{
+    <img src="@request.ImagePath" style="width:100%; border-radius:8px; margin-top:10px;" />
+}
+                @if (request.UserId == HttpContextAccessor.HttpContext.Session.GetInt32("UserId"))
+                {
+                    <form asp-action="DeleteMyRequest" asp-controller="RequestTechnician" method="post" style="margin-top:10px;">
+                        <input type="hidden" name="id" value="@request.RequestId" />
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
+                }
+            </div>
+        }
+    </div>
 }

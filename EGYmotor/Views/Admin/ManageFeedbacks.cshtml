@@ -1,15 +1,10 @@
 ﻿@model IEnumerable<EGYmotor.Models.Feedback>
-
-
 @{
-    Layout = "~/Views/Shared/_LayoutAdmin.cshtml"; // ✅
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
     ViewData["Title"] = "Manage Feedbacks";
 }
-
 <link rel="stylesheet" href="~/css/feedback2.css" />
-
 <h2 style="text-align: center;">All User Feedbacks</h2>
-
 <div class="feedback-container">
     @if (Model.Any())
     {
@@ -19,8 +14,6 @@
                 <div class="feedback-user">@feedback.RegisterUser?.UserName</div>
                 <div class="feedback-email">@feedback.RegisterUser?.Email</div>
                 <div class="feedback-message">@feedback.Message</div>
-
-                <!-- زر الحذف للـ Admin يظهر دايمًا -->
                 <form asp-action="DeleteByAdmin" asp-controller="Feedback" method="post" style="margin-top:10px;">
                     <input type="hidden" name="id" value="@feedback.FeedbackID" />
                     <button type="submit" class="btn btn-danger">Delete Feedback</button>

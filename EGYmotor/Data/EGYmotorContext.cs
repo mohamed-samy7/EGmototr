@@ -9,7 +9,7 @@ namespace EGYmotor.Data
 {
     public class EGYmotorContext : DbContext
     {
-        public EGYmotorContext (DbContextOptions<EGYmotorContext> options)
+        public EGYmotorContext(DbContextOptions<EGYmotorContext> options)
             : base(options)
         {
         }
@@ -20,8 +20,17 @@ namespace EGYmotor.Data
         public DbSet<EGYmotor.Models.Payment> Payments { get; set; }
         public DbSet<EGYmotor.Models.Admin> Admins { get; set; }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
 
+            modelBuilder.Entity<Feedback>()
+                .HasIndex(f => f.UserId)
+                .IsUnique(false);
 
-
+            modelBuilder.Entity<Request>()
+                .HasIndex(r => r.UserId)
+                .IsUnique(false);
+        }
     }
 }

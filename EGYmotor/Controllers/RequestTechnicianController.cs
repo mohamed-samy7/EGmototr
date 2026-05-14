@@ -24,27 +24,39 @@ namespace EGYmotor.Controllers
             {
                 return RedirectToAction("Login", "Login");
             }
-
             return View();
         }
-     
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(Request model)
+        public async Task<IActionResult> Create(Request model, IFormFile? ImageFile)
         {
             int? userId = HttpContext.Session.GetInt32("UserId");
-
             if (userId == null)
             {
                 return RedirectToAction("Index", "Home");
             }
 
-                model.UserId = userId.Value;
-                db.Requests.Add(model);
-                db.SaveChanges();
+            if (ImageFile != null && ImageFile.Length > 0)
+            {
+                var uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "uploads");
+                if (!Directory.Exists(uploadsFolder))
+                {
+                    Directory.CreateDirectory(uploadsFolder);
+                }
+                var fileName = Guid.NewGuid().ToString() + Path.GetExtension(ImageFile.FileName);
+                var filePath = Path.Combine(uploadsFolder, fileName);
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    await ImageFile.CopyToAsync(stream);
+                }
+                model.ImagePath = "/uploads/" + fileName;
+            }
 
-                TempData["SuccessMessage"] = "Successful Request";
-                return RedirectToAction(nameof(MyRequest)); 
+            model.UserId = userId.Value;
+            db.Requests.Add(model);
+            db.SaveChanges();
+            TempData["SuccessMessage"] = "Successful Request";
+            return RedirectToAction(nameof(MyRequest));
         }
 
         public IActionResult MyRequest()
@@ -55,17 +67,18 @@ namespace EGYmotor.Controllers
                 return RedirectToAction("Login", "Login");
             }
 
-            var request = db.Requests
-                            .Include(r => r.RegisterUser) 
-                            .FirstOrDefault(r => r.UserId == userId.Value);
+            var requests = db.Requests
+                            .Include(r => r.RegisterUser)
+                            .Where(r => r.UserId == userId.Value)
+                            .ToList();
 
-            if (request == null)
+            if (!requests.Any())
             {
                 ViewBag.Message = "You have not made a request yet.";
                 return View();
             }
 
-            return View(request);
+            return View(requests);
         }
 
         [HttpPost]
@@ -86,7 +99,6 @@ namespace EGYmotor.Controllers
 
             db.Requests.Remove(request);
             db.SaveChanges();
-
             TempData["SuccessMessage"] = "Request deleted successfully.";
             return RedirectToAction(nameof(Create));
         }

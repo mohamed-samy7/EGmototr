@@ -20,7 +20,6 @@ namespace EGYmotor.Controllers
             var feedbacks = await _context.Feedback
                 .Include(f => f.RegisterUser)
                 .ToListAsync();
-
             return View(feedbacks);
         }
 
@@ -31,9 +30,6 @@ namespace EGYmotor.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-
-
-
         public async Task<IActionResult> Create(Feedback feedback)
         {
             var userId = HttpContext.Session.GetInt32("UserId");
@@ -43,12 +39,9 @@ namespace EGYmotor.Controllers
             }
 
             feedback.UserId = userId.Value;
-
             _context.Feedback.Add(feedback);
             await _context.SaveChangesAsync();
-
             return RedirectToAction(nameof(AllFeedbacks));
-
         }
 
         [HttpPost]
@@ -66,14 +59,14 @@ namespace EGYmotor.Controllers
 
             if (feedback == null)
             {
-                return NotFound(); 
+                return NotFound();
             }
 
             _context.Feedback.Remove(feedback);
             await _context.SaveChangesAsync();
-
             return RedirectToAction(nameof(AllFeedbacks));
         }
+
         [HttpPost]
         public IActionResult DeleteByAdmin(int id)
         {
@@ -83,10 +76,7 @@ namespace EGYmotor.Controllers
                 _context.Feedback.Remove(feedback);
                 _context.SaveChanges();
             }
-
             return RedirectToAction("ManageFeedbacks", "Admin");
         }
-
-
     }
 }
